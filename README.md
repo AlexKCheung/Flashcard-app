@@ -4,7 +4,7 @@
 Can click question to show the answer on the flashcard. 
 
 ### App Walk-though
-<img src="YOUR_GIF_URL_HERE" width=200><br>
+<img src="https://github.com/AlexKCheung/Flashcard-app/blob/main/Android_Emulator_-_Pixel_2_API_30_5554_2022-02-26_12-16-24_AdobeCreativeCloudExpress.gif" width=200><br>
 
 ## Required
 - [x] Create New Project in Android Studio
