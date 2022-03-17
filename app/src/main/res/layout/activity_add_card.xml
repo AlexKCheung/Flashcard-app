@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddCardActivity">
+
+    <!-- x cancel button to go back to main activity -->
+    <ImageView
+        android:id="@+id/flashcard_cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_cancel"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        />
+
+    <ImageView
+        android:id="@+id/flashcard_save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_save"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        />
+
+
+    <!-- question and answer -->
+
+    <EditText
+        android:id="@+id/input_question"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:hint="Enter the question here"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:layout_alignParentTop="true"
+        />
+
+    <EditText
+        android:id="@+id/input_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:hint="Enter the answer here"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:layout_below="@+id/input_question"
+        />
+
+</RelativeLayout>
