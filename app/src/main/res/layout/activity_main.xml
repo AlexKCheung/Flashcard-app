@@ -42,6 +42,23 @@
         android:layout_alignParentBottom="true"
         />
 
+    <ImageView
+        android:id="@+id/flashcard_next_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_next"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        />
+
+    <ImageView
+        android:id="@+id/flashcard_prev_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_prev"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        />
 
 
 
