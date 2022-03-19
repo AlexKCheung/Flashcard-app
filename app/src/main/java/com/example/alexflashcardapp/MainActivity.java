@@ -100,6 +100,42 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // DELETE current card
+        findViewById(R.id.flashcard_trash_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                allFlashcards = flashcardDatabase.getAllCards();
+
+                // what is base case if last card to delete? lol
+                // base case no more cards left
+                if (allFlashcards.size() == 0 || allFlashcards.size() == 1) {
+                    return;
+                }
+
+                // else
+
+                // delete card
+                flashcardDatabase.deleteCard(((TextView) findViewById(R.id.input_question)).getText().toString());
+
+                // advance pointer to next index to show next card
+                currentCardDisplayIndex -= 1;
+
+                // make sure not index out of bounds if viewing last card in list
+                if (currentCardDisplayIndex < 0) {
+                    // reset
+                    currentCardDisplayIndex = 0;
+                }
+
+                // set question and answer textviews with data form database
+                allFlashcards = flashcardDatabase.getAllCards();
+                Flashcard flashcard = allFlashcards.get(currentCardDisplayIndex);
+
+                ((TextView) findViewById(R.id.input_question)).setText(flashcard.getQuestion());
+                ((TextView) findViewById(R.id.input_answer)).setText(flashcard.getAnswer());
+
+            }
+        });
+
 
 
 
