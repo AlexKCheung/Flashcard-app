@@ -2,18 +2,18 @@ package com.example.alexflashcardapp;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.animation.Animator;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 // my added
 import android.content.Intent;
-import android.widget.Toast;
-import android.widget.EditText;
 
-import com.google.android.material.snackbar.Snackbar;
-
-import org.w3c.dom.Text;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -72,6 +72,29 @@ public class MainActivity extends AppCompatActivity {
 
                 ((TextView) findViewById(R.id.input_question)).setText(flashcard.getQuestion());
                 ((TextView) findViewById(R.id.input_answer)).setText(flashcard.getAnswer());
+
+                final Animation leftOutAnim = AnimationUtils.loadAnimation(v.getContext(), R.anim.left_out);
+                final Animation rightInAnim = AnimationUtils.loadAnimation(v.getContext(), R.anim.right_in);
+
+                leftOutAnim.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                        // method called when animation starts
+                    }
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        // animation finished
+                        questionTextView.startAnimation(rightInAnim);
+
+                    }
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                        // no need to worry
+                    }
+
+                });
+
+
             }
         });
         // PREVIOUS button to view saved flashcards
@@ -133,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 ((TextView) findViewById(R.id.input_question)).setText(flashcard.getQuestion());
                 ((TextView) findViewById(R.id.input_answer)).setText(flashcard.getAnswer());
 
+
             }
         });
 
@@ -144,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddCardActivity.class);
                 MainActivity.this.startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
             }
         });
 
@@ -157,8 +182,31 @@ public class MainActivity extends AppCompatActivity {
                 questionTextView.setVisibility(View.INVISIBLE);
                 answerTextView.setVisibility(View.VISIBLE);
 
+
+
+                View answerSideView = findViewById(R.id.input_answer);
+
+// get the center for the clipping circle
+                int cx = answerSideView.getWidth() / 2;
+                int cy = answerSideView.getHeight() / 2;
+
+// get the final radius for the clipping circle
+                float finalRadius = (float) Math.hypot(cx, cy);
+
+// create the animator for this view (the start radius is zero)
+                Animator anim = ViewAnimationUtils.createCircularReveal(answerSideView, cx, cy, 0f, finalRadius);
+
+// hide the question and show the answer to prepare for playing the animation!
+                questionTextView.setVisibility(View.INVISIBLE);
+                answerSideView.setVisibility(View.VISIBLE);
+
+                anim.setDuration(3000);
+                anim.start();
+
                 //Toast.makeText(MainActivity.this, "I clicked the question!", Toast.LENGTH_SHORT).show();
                 //Log.i("Alex", "entered question onclick method");
+
+
             }
         });
 
@@ -167,6 +215,25 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 answerTextView.setVisibility(View.INVISIBLE);
                 questionTextView.setVisibility(View.VISIBLE);
+
+                View questionSideView = findViewById(R.id.input_question);
+
+// get the center for the clipping circle
+                int cx = questionSideView.getWidth() / 2;
+                int cy = questionSideView.getHeight() / 2;
+
+// get the final radius for the clipping circle
+                float finalRadius = (float) Math.hypot(cx, cy);
+
+// create the animator for this view (the start radius is zero)
+                Animator anim = ViewAnimationUtils.createCircularReveal(questionSideView, cx, cy, 0f, finalRadius);
+
+// hide the question and show the answer to prepare for playing the animation!
+                answerTextView.setVisibility(View.INVISIBLE);
+                questionSideView.setVisibility(View.VISIBLE);
+
+                anim.setDuration(3000);
+                anim.start();
             }
         }));
 
@@ -178,6 +245,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddCardActivity.class);
                 startActivityForResult(intent, 100);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
             }
         });
     }
