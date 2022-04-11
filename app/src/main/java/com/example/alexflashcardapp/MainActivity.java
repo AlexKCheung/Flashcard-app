@@ -65,14 +65,14 @@ public class MainActivity extends AppCompatActivity {
                     // reset
                     currentCardDisplayIndex = 0;
                 }
-
+/*
                 // set question and answer textviews with data form database
                 allFlashcards = flashcardDatabase.getAllCards();
                 Flashcard flashcard = allFlashcards.get(currentCardDisplayIndex);
 
                 ((TextView) findViewById(R.id.input_question)).setText(flashcard.getQuestion());
                 ((TextView) findViewById(R.id.input_answer)).setText(flashcard.getAnswer());
-
+*/
                 final Animation leftOutAnim = AnimationUtils.loadAnimation(v.getContext(), R.anim.left_out);
                 final Animation rightInAnim = AnimationUtils.loadAnimation(v.getContext(), R.anim.right_in);
 
@@ -80,11 +80,21 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onAnimationStart(Animation animation) {
                         // method called when animation starts
+                        //findViewById(R.id.input_question).startAnimation(leftOutAnim);
                     }
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         // animation finished
-                        questionTextView.startAnimation(rightInAnim);
+                        findViewById(R.id.input_question).startAnimation(rightInAnim);
+
+                        // moved previous logic to here
+                        // set question and answer textviews with data form database
+                        allFlashcards = flashcardDatabase.getAllCards();
+                        Flashcard flashcard = allFlashcards.get(currentCardDisplayIndex);
+
+                        ((TextView) findViewById(R.id.input_question)).setText(flashcard.getQuestion());
+                        ((TextView) findViewById(R.id.input_answer)).setText(flashcard.getAnswer());
+
 
                     }
                     @Override
@@ -93,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 });
+
+                questionTextView.startAnimation(leftOutAnim);
 
 
             }
