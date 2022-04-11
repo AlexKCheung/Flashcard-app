@@ -5,7 +5,7 @@ Animations for flashcard app.
 
 ### App Walk-though
 
-<img src="https://github.com/AlexKCheung/Flashcard-app/blob/main/flashcard_week_7.gif" width=200><br>
+<img src="https://github.com/AlexKCheung/Flashcard-app/blob/main/last%20gifAndroid%20Emulator%20-%20Pixel_2_API_30_5554%202022-04-10%2017-03-00.gif" width=200><br>
 
 ## Required
 - [x] User sees a transition animation when going from the main screen to the add card screen.
